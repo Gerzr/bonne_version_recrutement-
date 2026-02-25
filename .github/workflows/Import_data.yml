@@ -3,6 +3,10 @@ name: Kobo Mail Automation
 permissions:
   contents: write
 
+concurrency:
+  group: kobo-mail-automation
+  cancel-in-progress: true
+
 on:
   schedule:
     - cron: "*/5 * * * *"
@@ -44,8 +48,9 @@ jobs:
 
       - name: Commit sent IDs
         run: |
-          git config --local user.email "koglogerard@gmail.com"
-          git config --local user.name "koglo gerard"
-          git add sent_submissions.json
-          git commit -m "Update sent submissions" || echo "No changes to commit"
-          git push
+           git config --local user.email "koglogerard@gmail.com"
+           git config --local user.name "koglo gerard"
+           git add sent_submissions.json
+           git commit -m "Update sent submissions" || echo "No changes to commit"
+           git pull --rebase origin main
+           git push origin HEAD:main

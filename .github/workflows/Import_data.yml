@@ -1,5 +1,8 @@
 name: Kobo Mail Automation
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "*/5 * * * *"
@@ -11,6 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - uses: r-lib/actions/setup-r@v2
 

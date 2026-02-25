@@ -28,6 +28,7 @@ jobs:
             any::stringr
             any::robotoolbox
             any::rJava
+            any::janitor
 
       - name: Run script
         env:

@@ -3,13 +3,11 @@ name: Kobo Mail Automation
 permissions:
   contents: write
 
-concurrency:
-  group: kobo-mail-automation
-  cancel-in-progress: true
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
 
 jobs:
   run-script:

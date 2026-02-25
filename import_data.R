@@ -215,7 +215,7 @@ for (i in seq_len(nrow(new_submissions))) {
   
   send.mail(
     from = email_user,
-    to = "koglogerard@gmail.com",
+    to = "caresp2011@gmail.com",
     subject = paste("Nouvelle candidature -", nom, prenom),
     body = body_mail,
     smtp = list(

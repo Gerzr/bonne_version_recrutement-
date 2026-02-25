@@ -18,11 +18,22 @@ jobs:
       - name: Install Java
         run: sudo apt-get update && sudo apt-get install -y default-jdk
 
-      - name: Install R packages
-        run: |
-          Rscript -e 'install.packages(c("httr","jsonlite","dplyr","purrr","tidyr","mailR","stringr","robotoolbox","tidyverse","rJava"))'
+      - name: Install dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::tidyverse
+            any::httr
+            any::jsonlite
+            any::dplyr
+            any::purrr
+            any::tidyr
+            any::mailR
+            any::stringr
+            any::robotoolbox
+            any::rJava
 
-      - name: Run script
+     - name: Run script
         env:
           KOBO_API_TOKEN: ${{ secrets.KOBO_API_TOKEN }}
           KOBO_FORM_ID: ${{ secrets.KOBO_FORM_ID }}

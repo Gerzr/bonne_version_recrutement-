@@ -59,12 +59,11 @@ participants <- data %>%
   mutate(
     iid = `_id`,
     email = `Veuillez_entrer_votre_addresse_e_mail`,
-    nb_abstract = as.integer(`group_lu9eh78/nbdiplomes`),
     nom = `Veuillez_entrer_votr_en_lettres_capitales`,
     prenom = Veuillez_entrer_votre_ou_vos_pr_nom_s,
     submission_time = `_submission_time`
   ) %>%
-  select(iid, email, nb_abstract, nom, prenom, submission_time)
+  select(iid, email, nom, prenom, submission_time)
 
 # Vérifier que abstracts_group existe et l'extraire proprement
 abstracts_group <- data %>%

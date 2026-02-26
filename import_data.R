@@ -43,7 +43,7 @@ data <- content(response, as = "parsed", simplifyVector = TRUE)$results
 
 # Vérifier si des soumissions existent
 if (length(data) == 0) {
-  stop("Aucune soumission trouvée dans KoboToolbox.")
+  quit(status = 0)
 }
 
 # Charger la liste des soumissions déjà envoyées

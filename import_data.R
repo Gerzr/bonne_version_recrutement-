@@ -58,21 +58,22 @@ if (file.exists(sent_submissions_file)) {
 participants <- data %>%
   mutate(
     iid = `_id`,
+    nb_abstract = as.integer(`group_wa5po86/nbattest`),
     email = `Veuillez_entrer_votre_addresse_e_mail`,
     nom = `Veuillez_entrer_votr_en_lettres_capitales`,
     prenom = Veuillez_entrer_votre_ou_vos_pr_nom_s,
     submission_time = `_submission_time`
   ) %>%
-  select(iid, email, nom, prenom, submission_time)
+  select(iid, email, nom, prenom,nb_abstract, submission_time)
 
 # Vérifier que abstracts_group existe et l'extraire proprement
 abstracts_group <- data %>%
   select(`_id`,
-         `group_lu9eh78/nbdiplomes`,
+         `group_wa5po86/nbattest`,
          veillez_entre_la_lettre_motiva_001) %>%
-  filter(!map_lgl(`group_lu9eh78/nbdiplomes`, is.null)) %>%
-  mutate(`group_lu9eh78/nbdiplomes` = map(`group_lu9eh78/nbdiplomes`, as_tibble)) %>%
-  unnest(`group_lu9eh78/nbdiplomes`) %>%
+  filter(!map_lgl(`group_wa5po86/nbattest`, is.null)) %>%
+  mutate(`group_wa5po86/nbattest` = map(`group_wa5po86/nbattest`, as_tibble)) %>%
+  unnest(`group_wa5po86/nbattest`) %>%
   select(`_id`, title = veillez_entre_la_lettre_motiva_001)
 
 # Associer les attestaions aux candidats

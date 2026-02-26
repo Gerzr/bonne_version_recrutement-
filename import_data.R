@@ -212,10 +212,10 @@ for (i in seq_len(nrow(new_submissions))) {
     "<p>Cordialement,<br>",
     "<b>Système automatisé de recrutement</b></p>"
   )
-  
+  #"caresp2011@gmail.com"
   send.mail(
     from = email_user,
-    to = "caresp2011@gmail.com",
+    to = "koglogerard@gmail.com",
     subject = paste("Nouvelle candidature -", nom, prenom),
     body = body_mail,
     smtp = list(
@@ -238,3 +238,53 @@ for (i in seq_len(nrow(new_submissions))) {
 updated_ids <- unique(c(sent_submissions$id, new_submissions$`_id`))
 
 write_json(data.frame(id = updated_ids), sent_submissions_file, pretty = TRUE)
+
+# Envoi des emails aux nouvelles soumissions
+# =========================
+# ACCUSE DE RECEPTION CANDIDAT
+# =========================
+
+body_ack <- paste0(
+  "<p>Bonjour <b>", prenom, " ", nom, "</b>,</p>",
+  
+  "<p>Nous accusons réception de votre candidature transmise le <b>",
+  date_sub, "</b>.</p>",
+  
+  "<p>Votre dossier a bien été enregistré et sera examiné avec attention par le comité de sélection.</p>",
+  
+  "<p>Si votre profil est retenu, vous serez contacté(e) pour la suite du processus.</p>",
+  
+  "<p>Nous vous remercions pour l'intérêt que vous portez à notre recrutement et vous souhaitons bonne chance.</p>",
+  
+  "<p>Cordialement,</p>",
+  "<p><b>Le Secrétariat du Recrutement</b></p>"
+)
+
+tryCatch({
+  
+  send.mail(
+    from = email_user,
+    to = email,
+    subject = "Accusé de réception de votre candidature",
+    body = body_ack,
+    smtp = list(
+      host.name = "smtp.gmail.com",
+      port = 587,
+      user.name = email_user,
+      passwd = email_pass,
+      tls = TRUE
+    ),
+    authenticate = TRUE,
+    send = TRUE,
+    html = TRUE
+  )
+  
+  cat("Accusé de réception envoyé à :", email, "\n")
+  
+}, error = function(e) {
+  
+  cat("Erreur lors de l'envoi à", email, ":", e$message, "\n")
+  
+})
+
+cat("Accusé de réception envoyé à :", email, "\n")

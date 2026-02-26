@@ -151,7 +151,7 @@ for (i in seq_len(nrow(new_submissions))) {
   prenom  <- data$Veuillez_entrer_votre_ou_vos_pr_nom_s[row_index]
   email   <- data$Veuillez_entrer_votre_addresse_e_mail[row_index]
   date_sub <- data$`_submission_time`[row_index]
-  
+
   if (is.na(email) || email == "")
     next
   
